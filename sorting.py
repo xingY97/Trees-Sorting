@@ -6,7 +6,7 @@ def is_sorted(items):
     for i in range(len(items) - 1):
         current_item = items[i]
         next_item = items[i+1]
-        
+
         #checking for ascending order, so the current item need to be less than next item
         #if next item is less than current item then it is not sorted. return false
         if next_item <= current_item:
@@ -17,21 +17,21 @@ def bubble_sort(items):
     """
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    #minus one because there is not an item after the comparison of last item
+    #minus one because there is no item after the comparison of last item
     items_length = len(items) - 1
     #use sorted function to break the loop when the list is being sorted
     sorted = False
-    #as long as is_sorted is False, while loop continues to run until its true 
+    # as long as is_sorted is False, while loop continues to run until its true 
     while not sorted:
         sorted = True
         for i in range(0,items_length):
+            #use i to go through the items, check is current items is greater than the next item
+            #if True, stop the loop, if false, swap the two items
             if items[i] > items[i+1]:
                 sorted = False
                 items[i], items[i+1] = items[i+1], items[i]
-                #use i to go through the items, check is current items is greater than or less than next item
-                #if True, stop the loop, if false, swap the two items
-                #if all items are sorted, is sorted function will return, if condition would not activate
-                # so the is_sorted will stay True
+                #if all items are sorted,  sorted condion will return true, so if statement would not activate
+                # so the sorted will stay True
     return items
 
 

@@ -60,11 +60,27 @@ def selection_sort(items):
 
     return items
 
-
 def insertion_sort(items):
+    """Sort given items by taking first unsorted item, inserting it in sorted
+    order in front of items, and repeating until all items are in order.
+    TODO: Running time: ??? Why and under what conditions?
+    TODO: Memory usage: ??? Why and under what conditions?"""
+    #sorting starts at index 1 since in insertion sort the first element is considered sorted
+    items_length = range(1,len(items))
+    for i in items_length:
+        vaule_to_sort = items[i]
+        #check if the vaule on the left is higher than the value we are trying to sort at i+1 position
+        #i must be greater than 0 because python negative indexing
+        #if element on the left is higher than the element i+1, we need to swap them
+        while items[i-1] > vaule_to_sort and i > 0:
+            items[i], items[i-1] = items[i-1], items[i]
+            #and then comparison continue sort until the list is all sorted 
+            i = i - 1
+    return items
 
-    """TODO: Running time: ??? Why and under what conditions?
-       TODO: Memory usage: ??? Why and under what conditions?"""
+
+
+
     
 
 # print(is_sorted([1,3,5,10,20]))#expecting True
@@ -72,4 +88,6 @@ def insertion_sort(items):
 
 #print(bubble_sort([1,4,5,2])) #expecting 1,2,4,5
 
-print(selection_sort([7,8,9,5,4,3,3,0]))
+#print(selection_sort([7,8,9,5,4,3,3,0])) #expecting 0,3,3,4,5,7,8,9
+
+#print(insertion_sort([2,3,44,5,6,7,7,9])) #expecting 2,3,5,6,7,7,9,44

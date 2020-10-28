@@ -36,28 +36,40 @@ def bubble_sort(items):
 
 
 def selection_sort(items):
-    """Sort given items by finding minimum item, swapping it with first
-    unsorted item, and repeating until all items are in sorted order.
+    """Selection sort breaks the input list in two parts. the sorted part which initially is empty,
+    the the unsorted part contains all elements, the algorithms selectc the minimin value of all the unsorted file and swaps
+    it with the fitst unsorted value, and then increass the sorted part by one.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until all items are in sorted order
-    # TODO: Find minimum item in unsorted items
-    # TODO: Swap it with first unsorted item
+
+    items_length = range(0, len(items))
+    #use i to go through every element in the items
+    for i in items_length:
+        #each time we do an iteration, the first item[i] is default min_value
+        min_value = i
+        #use j as the next item after min_value  
+        #if j element is less than the min value
+        for j in range(i+1, len(items_length)):
+            if items[j] < items[min_value]:
+                #replace the min_value with j value
+                min_value = j
+        #if we find an item thats less than the default value
+        if min_value != i:
+            #we need to switch the items
+            items[min_value], items[i] = items[i], items[min_value]
+
+    return items
 
 
 def insertion_sort(items):
-    """Sort given items by taking first unsorted item, inserting it in sorted
-    order in front of items, and repeating until all items are in order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until all items are in sorted order
-    # TODO: Take first unsorted item
-    # TODO: Insert it in sorted order in front of items
 
-
-if __name__ == "__main__":
+    """TODO: Running time: ??? Why and under what conditions?
+       TODO: Memory usage: ??? Why and under what conditions?"""
     
-    # print(is_sorted([1,3,5,10,20]))#expecting True
-    # print(is_sorted([3,5,10,20,1]))#expecting False
 
-    #print(bubble_sort([1,4,5,2])) #expecting 1,2,4,5
+# print(is_sorted([1,3,5,10,20]))#expecting True
+# print(is_sorted([3,5,10,20,1]))#expecting False
+
+#print(bubble_sort([1,4,5,2])) #expecting 1,2,4,5
+
+print(selection_sort([7,8,9,5,4,3,3,0]))

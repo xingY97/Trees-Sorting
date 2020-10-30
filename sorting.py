@@ -16,7 +16,10 @@ def is_sorted(items):
 def bubble_sort(items):
     """
     TODO: Running time: ??? Why and under what conditions?
+    #best case for bubble_sort is if the list is aleady sorted. no swapping needed 0(n)
+    #worst case for bubble sort is when the smallest number is at the end
     TODO: Memory usage: ??? Why and under what conditions?"""
+
     #minus one because there is no item after the comparison of last item
     items_length = len(items) - 1
     #use sorted function to break the loop when the list is being sorted
@@ -39,9 +42,12 @@ def selection_sort(items):
     """Selection sort breaks the input list in two parts. the sorted part which initially is empty,
     the the unsorted part contains all elements, the algorithms selectc the minimin value of all the unsorted file and swaps
     it with the fitst unsorted value, and then increass the sorted part by one.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
 
+    TODO: Running time: ??? Why and under what conditions?
+    #best and worst case for selection sort are the same, o(n*2), regardless if the list is sorted or not,
+    #it will have to go throught the whole list to make sure
+    TODO: Memory usage: ??? Why and under what conditions?"""
+    0(1)
     items_length = range(0, len(items))
     #use i to go through every element in the items
     for i in items_length:

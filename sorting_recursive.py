@@ -1,40 +1,5 @@
 #!python
 
-# def merge(items1, items2):
-#     """Merge given lists of items, each assumed to already be in sorted order,
-#     and return a new list containing all items in sorted order.
-#     TODO: Running time: ??? Why and under what conditions?
-#     TODO: Memory usage: ??? Why and under what conditions?"""
-#     # TODO: Find minimum item in both lists and append it to new list
-#     #since we assumed two lists are already sorted, if items1 is empty return items2, vice versa
-#     #and then create a empty new list to append items from items1 and 2
-#     if len(items1) == 0:
-#         return items2
-#     if len(items2) == 0:
-#         return items1
-#     result_list = []
-
-#     # through the lists from index 0
-#     i,j = 0,0
-#     #we have to Find minimum item in both lists and append it to new list
-#     #use a while loop so it repeats until one list is empty
-#     #if first item in list1 is smaller than first item in list 2, append first item in list 1 to the new list, else, append item from list 2 to the new list, and then check
-#     #the next element in the list until the list is empty, so we do i += 1
-#     while len(items1) > i and len(items2) > j:
-#         if items1[i] < items2[j]:
-#             result_list.append(items1[i])
-#             i += 1
-#         else:
-#             result_list.append(items2[j])
-#             j += 1
-#     # TODO: Append remaining items in non-empty list to new list
-#     #extend method adds all iterable element to the end of new list
-#     result_list.extend(items1[i:])
-#     result_list.extend(items2[j:])
-
-#     return result_list
-
-
 def merge_sort(array):
     if len(array) <= 1:
         return array
@@ -101,7 +66,7 @@ def main():
     print(array)
     result = merge_sort(array)
     print(result)
-    
+
     print(quick_sort([5,6,7,9,5,31,4,5,67,0]))
 
 if __name__ == "__main__":

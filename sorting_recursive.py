@@ -71,31 +71,29 @@ def merge(left,right):
 
     return result
 
-def partition(items, low, high):
-    """Return index `p` after in-place partitioning given items in range
-    `[low...high]` by choosing a pivot (TODO: document your method here) from
-    that range, moving pivot into index `p`, items less than pivot into range
-    `[low...p-1]`, and items greater than pivot into range `[p+1...high]`.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Choose a pivot any way and document your method in docstring above
-    # TODO: Loop through all items in range [low...high]
-    # TODO: Move items less than pivot into front of range [low...p-1]
-    # TODO: Move items greater than pivot into back of range [p+1...high]
-    # TODO: Move pivot item into final position [p] and return index p
 
+def quick_sort(array):
+    #base case, if the length of the array is 0 or 1, return the array, and assumed it is sorted.
+    length = len(array)
+    if length <= 1:
+        return array
+    #use pop method to remove the last element at the pivot then return it 
+    else:
+        pivot = array.pop()
 
-def quick_sort(items, low=None, high=None):
-    """Sort given items in place by partitioning items in range `[low...high]`
-    around a pivot item and recursively sorting each remaining sublist range.
-    TODO: Best case running time: ??? Why and under what conditions?
-    TODO: Worst case running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Check if high and low range bounds have default values (not given)
-    # TODO: Check if list or range is so small it's already sorted (base case)
-    # TODO: Partition items in-place around a pivot and get index of pivot
-    # TODO: Sort each sublist range by recursively calling quick sort
+    #create two empty list to append elements
+    items_greater = []
+    items_lower = []
 
+    #compare every element to the pivot element, and append then to items_greater list if greater than pivot, append the element to items_lower if it is lower than the pivot
+    for i in array:
+        if i > pivot:
+            items_greater.append(i)
+        
+        else:
+            items_lower.append(i)
+
+    return quick_sort(items_lower) + [pivot] + quick_sort(items_greater)
 
 
 def main():
@@ -103,6 +101,8 @@ def main():
     print(array)
     result = merge_sort(array)
     print(result)
+    
+    print(quick_sort([5,6,7,9,5,31,4,5,67,0]))
 
 if __name__ == "__main__":
     main()

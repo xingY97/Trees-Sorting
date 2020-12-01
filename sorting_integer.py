@@ -1,4 +1,6 @@
 
+from sorting_recursive import merge_sort
+
 def counting_sort(numbers):
     """Sort given numbers (integers) by counting occurrences of each number,
     then looping over counts and copying that many numbers into output list.
@@ -35,14 +37,34 @@ def bucket_sort(numbers, num_buckets=10):
     then sorting each bucket and concatenating all buckets in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Find range of given numbers (minimum and maximum values)
-    # TODO: Create list of buckets to store numbers in subranges of input range
+    #if length of numbers array contains one elements, return the element.
+    if len(numbers) < 2:
+        return 
+    # then Find range of given numbers and divide it into 10 buckets
+    minNum = min(numbers)
+    maxNum = max(numbers)
+    bucket_range = (maxNum - minNum) // num_buckets + 1
+    #then Create list of buckets to store numbers in subranges of input range
+    buckets = [[] for _ in range(num_buckets)]
     # TODO: Loop over given numbers and place each item in appropriate bucket
+    for item in numbers:
+        index = (item - minNum) // bucket_range
+        buckets[index].append(item)
     # TODO: Sort each bucket using any sorting algorithm (recursive or another)
+    for i in range(len(buckets)):
+        merge_sort(buckets[i])
     # TODO: Loop over buckets and append each bucket's numbers into output list
     # FIXME: Improve this to mutate input instead of creating new output list
+    i = 0
+    for bucket in buckets:
+        for item in bucket:
+            numbers[i] = item
+            i += 1
 
 if __name__ == "__main__":
-    item = [2,5,6,7,8,9,1]
+    item = [2,5,6,7,8,9,1,1]
     counting_sort(item)
+    print(item)
+
+    bucket_sort(item)
     print(item)

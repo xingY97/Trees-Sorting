@@ -35,16 +35,39 @@ class PrefixTree:
 
     def is_empty(self):
         """Return True if this prefix tree is empty (contains no strings)."""
-        if self.size == 0:
+        # TODO
+        if self.size == 0 :
             return True
 
     def contains(self, string):
-        """Return True if this prefix tree contains the given string."""
-        # TODO
+        """Return True if this prefix tree contains the given string.
+        """
+        if string == "":
+            return True
+        current_node = self.root
+        for s in string:
+            # if character is not root's children
+            if s not in current_node.children: 
+                return False
+            current_node = current_node.get_child(s)
+        return current_node.terminal == True
+
+
 
     def insert(self, string):
-        """Insert the given string into this prefix tree."""
-        # TODO
+        """Insert the given string into this prefix tree.
+        """
+        current_node = self.root
+        unique = False
+        for i in string:
+            if i not in current_node.children:
+                unique = True
+                current_node.children[i] = PrefixTreeNode(i)
+            current_node = current_node.children[i]
+        current_node.terminal = True
+        if unique:
+            self.size += 1
+
 
     def _find_node(self, string):
         """Return a pair containing the deepest node in this prefix tree that
@@ -54,28 +77,71 @@ class PrefixTree:
         # Match the empty string
         if len(string) == 0:
             return self.root, 0
+
         # Start with the root node
         node = self.root
-        # TODO
+
+        depth = 0
+        while node:
+            node = node.children
+            depth += 1
+        return node, depth
+
 
     def complete(self, prefix):
         """Return a list of all strings stored in this prefix tree that start
         with the given prefix string."""
         # Create a list of completions in prefix tree
         completions = []
-        # TODO
+        string = prefix
+        current_node = self.root
+        preintri = False
+        
+        for p in prefix:
+            if p in current_node.children:
+                preintri = True
+                current_node = current_node.children[p]
+            elif p not in current_node.children:
+                return completions
+
+        self._traverse(current_node, prefix, completions)
+        if completions == [] and preintri == True:
+            completions.append(prefix)
+        return completions
 
     def strings(self):
         """Return a list of all strings stored in this prefix tree."""
         # Create a list of all strings in prefix tree
         all_strings = []
         # TODO
-
+        current_node = self.root
+        for char in current_node.children.keys():
+            all_strings.extend(self.complete(char))
+        return all_strings
     def _traverse(self, node, prefix, visit):
         """Traverse this prefix tree with recursive depth-first traversal.
         Start at the given node with the given prefix representing its path in
         this prefix tree and visit each node with the given visit function."""
-        # TODO
+
+        # node has no children return contorl back to the caller
+        if node.num_children() == 0:
+            return
+        # if this node contains char that ends the word then add to complteions
+        if node.terminal:
+            visit.append(prefix)
+        # string = prefix
+        # for char in children keys
+        for char in node.children.keys():
+            # concatenate prefix with char
+            string = prefix + char
+            child_node = node.get_child(char)
+            if child_node.terminal:
+                visit.append(string)
+            # otherwise make it a prefix and keep going
+            else:
+                prefix = string
+            # make a recursive call until we reach the end of the trie(with no children)
+            self._traverse(child_node, prefix, visit)
 
 
 def create_prefix_tree(strings):
